@@ -51,20 +51,68 @@ class Library :
         print(f"Book '{book.name}' has been returned.")
 
 
-book1 = Book(1, "Smart Work is Success", "Dilshad", "Non Fiction")
-book2 = Book(2, "Atomic Habits", "James Clear", "Self-help")
+
+library = Library()
 
 
-my_library = Library()
+while True:
+    print("\nWelcome to the Library Management System 📚")
+    print("1. Add a Book")
+    print("2. List All Books")
+    print("3. Remove a Book")
+    print("4. Give a Book")
+    print("5. Return a Book")
+    print("6. Exit")
 
-my_library.add_book(book1)
-my_library.add_book(book2)
+    choice = input("Enter your choice (1-6): ")
+
+    if choice == '1':
+       try:
+          book_number = int(input("Enter Book Number: "))
+          name = input("Enter Book Name: ")
+          author = input("Enter Author Name: ")
+          genre = input("Enter Genre: ")
+
+          book = Book(book_number,name,author,genre)
+          library.add_book(book)
+       except ValueError:
+          print("Invalid input. Book number must be a number.")
+
+    elif choice == '2':
+        library.list_books()
+       
+
+    elif choice == '3':
+       try:
+            book_number = int(input("Enter Book Number: "))
+            library.remove_book(book_number)
+       except ValueError:
+            print("Invalid input. Book number must be a number.")
+
+    elif choice == '4':
+        try:
+            book_number = int(input("Enter Book Number to lend: "))
+            library.give_book(book_number)
+        except ValueError:
+            print("Invalid input. Book number must be a number.")
+
+    elif choice == '5':
+        try:
+            book_number = int(input("Enter Returned Book Number: "))
+            name = input("Enter Book Name: ")
+            author = input("Enter Author Name: ")
+            genre = input("Enter Genre: ")
+
+            book = Book(book_number, name, author, genre)
+            library.return_book(book)
+        except ValueError:
+            print("Invalid input. Book number must be a number.")
+
+    elif choice == '6':
+        print("Exiting the program. Goodbye!")
+        break
+
+    else:
+        print("Invalid choice. Please enter a number between 1 and 6.")
 
 
-my_library.list_books()
-
-my_library.give_book(1)
-my_library.list_books()
-
-my_library.return_book(book1)
-my_library.list_books()
